@@ -5,6 +5,7 @@ import { renderLayout, attachLayoutListeners } from './pages/layout';
 import { renderDashboard, attachDashboardListeners } from './pages/dashboard';
 import { renderStationProfile, attachStationProfileListeners } from './pages/stationProfile';
 import { renderManpower, attachManpowerListeners } from './pages/manpower';
+import { renderSettings, attachSettingsListeners } from './pages/settings';
 
 const appDiv = document.getElementById('app');
 
@@ -31,6 +32,12 @@ const routes = {
     appDiv.innerHTML = renderLayout(content, '/manpower');
     attachLayoutListeners(navigateTo);
     attachManpowerListeners(navigateTo);
+  },
+  '/settings': async () => {
+    const content = await renderSettings();
+    appDiv.innerHTML = renderLayout(content, '/settings');
+    attachLayoutListeners(navigateTo);
+    attachSettingsListeners(navigateTo);
   }
 };
 
