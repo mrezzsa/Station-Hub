@@ -2,20 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
 
 :root {
-  /* Color Palette */
+  /* Color Palette - Red Theme */
   --bg-primary: #F8F9FA;
-  --text-primary: #2D0066;
-  --text-secondary: #5a4b73;
-  --primary: #7B2CBF;
-  --primary-hover: #5a1c93;
-  --accent: #D9ED92;
+  --text-primary: #2B1A1A;
+  --text-secondary: #5A4A4A;
+  --primary: #E60000;
+  --primary-hover: #B30000;
+  --accent: #FFD700;
   --status-danger: #FF4D4D;
   --status-warning: #FFA500;
   --status-success: #2ECC71;
   --white: #FFFFFF;
-  --border: rgba(45, 0, 102, 0.1);
-  --shadow-sm: 0 4px 6px -1px rgba(123, 44, 191, 0.05), 0 2px 4px -1px rgba(123, 44, 191, 0.03);
-  --shadow-md: 0 10px 15px -3px rgba(123, 44, 191, 0.1), 0 4px 6px -2px rgba(123, 44, 191, 0.05);
+  --border: rgba(230, 0, 0, 0.1);
+  --shadow-sm: 0 4px 6px -1px rgba(230, 0, 0, 0.05), 0 2px 4px -1px rgba(230, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(230, 0, 0, 0.1), 0 4px 6px -2px rgba(230, 0, 0, 0.05);
 
   /* Typography */
   --font-heading: 'Poppins', sans-serif;
@@ -238,7 +238,7 @@ th {
 .form-control:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.1);
+  box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
 }
 
 /* Auth Container */
