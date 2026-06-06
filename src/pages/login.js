@@ -4,7 +4,8 @@ export function renderLogin() {
   return `
     <div class="auth-container">
       <div class="auth-card">
-        <div style="text-align:center; margin-bottom: 2rem;">
+        <div style="text-align:center; margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center;">
+          <img src="/logo.png" alt="Angkasa Aviasi Servis" style="max-width: 140px; height: auto; object-fit: contain; margin-bottom: 1rem;" />
           <h2 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem;">Station Profile Hub</h2>
           <p style="color: var(--text-secondary);">Sign in to your account</p>
         </div>
