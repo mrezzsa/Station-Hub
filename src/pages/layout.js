@@ -3,12 +3,8 @@ import { supabase } from '../api/supabaseClient';
 export function renderSidebar(currentPath) {
   return `
     <div class="sidebar">
-      <div class="sidebar-logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-        <span>Station Hub</span>
+      <div class="sidebar-logo" style="margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;">
+        <img src="/logo.png" alt="Angkasa Aviasi Servis" style="max-width: 160px; height: auto; object-fit: contain;" />
       </div>
       <nav>
         <a href="/dashboard" class="nav-link ${currentPath === '/dashboard' ? 'active' : ''}" data-link>
