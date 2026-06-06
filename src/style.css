@@ -22,6 +22,19 @@
   --font-body: 'Inter', sans-serif;
 }
 
+[data-theme="dark"] {
+  --bg-primary: #0D0814;
+  --text-primary: #E2D8F0;
+  --text-secondary: #9A8CAE;
+  --primary: #9D4EDD;
+  --primary-hover: #C77DFF;
+  --accent: #E0FF4F;
+  --white: #1A1224;
+  --border: rgba(157, 78, 221, 0.2);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 15px -3px rgba(157, 78, 221, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -33,6 +46,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-logo {

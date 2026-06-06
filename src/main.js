@@ -1,11 +1,18 @@
 import './style.css';
 import { supabase } from './api/supabaseClient';
+
+// Initialize Theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
 import { renderLogin, attachLoginListeners } from './pages/login';
 import { renderLayout, attachLayoutListeners } from './pages/layout';
 import { renderDashboard, attachDashboardListeners } from './pages/dashboard';
 import { renderStationProfile, attachStationProfileListeners } from './pages/stationProfile';
 import { renderManpower, attachManpowerListeners } from './pages/manpower';
 import { renderSettings, attachSettingsListeners } from './pages/settings';
+import { renderStationDetails, attachStationDetailsListeners } from './pages/stationDetails';
 
 const appDiv = document.getElementById('app');
 
@@ -38,6 +45,12 @@ const routes = {
     appDiv.innerHTML = renderLayout(content, '/settings');
     attachLayoutListeners(navigateTo);
     attachSettingsListeners(navigateTo);
+  },
+  '/station-details': async () => {
+    const content = await renderStationDetails();
+    appDiv.innerHTML = renderLayout(content, '/stations');
+    attachLayoutListeners(navigateTo);
+    attachStationDetailsListeners(navigateTo);
   }
 };
 
@@ -48,6 +61,7 @@ async function navigateTo(path) {
 
 async function handleRoute() {
   let path = window.location.pathname;
+  let search = window.location.search;
 
   // Check auth status
   const { data: { session } } = await supabase.auth.getSession();
@@ -74,7 +88,15 @@ async function handleRoute() {
   document.querySelectorAll('[data-link]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      navigateTo(e.currentTarget.getAttribute('href'));
+      const href = e.currentTarget.getAttribute('href');
+      // For links with search params
+      if (href.includes('?')) {
+        const [p, s] = href.split('?');
+        window.history.pushState({}, href, window.location.origin + p + '?' + s);
+        handleRoute();
+      } else {
+        navigateTo(href);
+      }
     });
   });
 }

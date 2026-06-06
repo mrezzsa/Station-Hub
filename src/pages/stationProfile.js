@@ -28,7 +28,7 @@ export async function renderStationProfile() {
         <h3 style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 0.25rem;">${station.station_name}</h3>
         <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Manager: <strong>${station.manager_name || '-'}</strong></p>
       </div>
-      <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; width: 100%;">View Details</button>
+      <a href="/station-details?id=${station.id}" data-link class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; width: 100%;">View Details</a>
     </div>
   `).join('');
 
