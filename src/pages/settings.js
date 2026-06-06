@@ -16,6 +16,7 @@ export async function renderSettings() {
 
     return `
       <tr>
+        <td>${user.employee_id || '-'}</td>
         <td>${user.email}</td>
         <td><strong>${user.full_name}</strong></td>
         <td><span class="badge ${roleBadge}">${user.role}</span></td>
@@ -39,6 +40,10 @@ export async function renderSettings() {
       <div class="bento-card">
         <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Add New User Role</h3>
         <form id="add-user-form">
+          <div class="form-group">
+            <label for="user-employee-id">Nomor ID Karyawan</label>
+            <input type="text" id="user-employee-id" class="form-control" placeholder="123456" required>
+          </div>
           <div class="form-group">
             <label for="user-email">Email Address</label>
             <input type="email" id="user-email" class="form-control" placeholder="employee@bandara.com" required>
@@ -74,6 +79,7 @@ export async function renderSettings() {
         <table>
           <thead>
             <tr>
+              <th>ID Karyawan</th>
               <th>Email</th>
               <th>Full Name</th>
               <th>Role</th>
@@ -82,7 +88,7 @@ export async function renderSettings() {
             </tr>
           </thead>
           <tbody>
-            ${rows.length > 0 ? rows : '<tr><td colspan="5" style="text-align: center;">No users registered yet.</td></tr>'}
+            ${rows.length > 0 ? rows : '<tr><td colspan="6" style="text-align: center;">No users registered yet.</td></tr>'}
           </tbody>
         </table>
       </div>
@@ -99,6 +105,7 @@ export function attachSettingsListeners(routerNavigate) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      const employee_id = document.getElementById('user-employee-id').value;
       const email = document.getElementById('user-email').value;
       const full_name = document.getElementById('user-name').value;
       const password = document.getElementById('user-password').value;
@@ -124,7 +131,7 @@ export function attachSettingsListeners(routerNavigate) {
       // 2. Save Role to tbl_users
       const { data, error } = await supabase
         .from('tbl_users')
-        .insert([{ email, full_name, role, assigned_station }]);
+        .insert([{ email, full_name, role, assigned_station, employee_id }]);
 
       document.getElementById('loader-overlay').classList.add('hidden');
 

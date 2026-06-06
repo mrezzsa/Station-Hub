@@ -41,7 +41,9 @@ CREATE TABLE IF NOT EXISTS public.tbl_assets (
 
 -- 4. tbl_users
 CREATE TABLE IF NOT EXISTS public.tbl_users (
-    email TEXT PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email TEXT UNIQUE NOT NULL,
+    employee_id TEXT,
     full_name TEXT NOT NULL,
     role TEXT NOT NULL, -- Super Admin / Station Manager / Viewer
     assigned_station TEXT, -- Station ID or 'ALL'
