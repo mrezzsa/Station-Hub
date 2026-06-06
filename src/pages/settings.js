@@ -48,6 +48,10 @@ export async function renderSettings() {
             <input type="text" id="user-name" class="form-control" placeholder="Budi Santoso" required>
           </div>
           <div class="form-group">
+            <label for="user-password">Password (For Login)</label>
+            <input type="password" id="user-password" class="form-control" placeholder="Create a password" required>
+          </div>
+          <div class="form-group">
             <label for="user-role">Role</label>
             <select id="user-role" class="form-control" required>
               <option value="Viewer">Viewer (Read-Only)</option>
@@ -97,11 +101,27 @@ export function attachSettingsListeners(routerNavigate) {
       
       const email = document.getElementById('user-email').value;
       const full_name = document.getElementById('user-name').value;
+      const password = document.getElementById('user-password').value;
       const role = document.getElementById('user-role').value;
       const assigned_station = document.getElementById('user-station').value || 'ALL';
 
       document.getElementById('loader-overlay').classList.remove('hidden');
 
+      // 1. Create User in Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (authError) {
+        document.getElementById('loader-overlay').classList.add('hidden');
+        msgDiv.style.display = 'block';
+        msgDiv.textContent = 'Error creating account: ' + authError.message;
+        msgDiv.style.color = 'var(--status-danger)';
+        return;
+      }
+
+      // 2. Save Role to tbl_users
       const { data, error } = await supabase
         .from('tbl_users')
         .insert([{ email, full_name, role, assigned_station }]);
@@ -110,10 +130,10 @@ export function attachSettingsListeners(routerNavigate) {
 
       msgDiv.style.display = 'block';
       if (error) {
-        msgDiv.textContent = 'Error: ' + error.message;
+        msgDiv.textContent = 'Auth created, but error saving role: ' + error.message;
         msgDiv.style.color = 'var(--status-danger)';
       } else {
-        msgDiv.textContent = 'User role saved! Please ask them to Sign Up using this email.';
+        msgDiv.textContent = 'User successfully created! They can now log in.';
         msgDiv.style.color = 'var(--status-success)';
         form.reset();
         
